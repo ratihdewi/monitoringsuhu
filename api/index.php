@@ -15,11 +15,13 @@
 		$data = json_decode(file_get_contents("php://input"));
 		$item->suhu = $data->suhu;
 		$item->kelembaban = $data->kelembaban;
+        $item->ppm = $data->ppm;
 	} 
     elseif ($_SERVER['REQUEST_METHOD'] === 'GET'){
 		// The request is using the GET method
 		$item->suhu = isset($_GET['t']) ? $_GET['t'] : die('wrong structure!');
 		$item->kelembaban = isset($_GET['h']) ? $_GET['h'] : die('wrong structure!');
+        $item->ppm = isset($_GET['ppm']) ? $_GET['ppm'] : die('wrong structure!');
 	}else {
 		die('wrong request method');
 	}

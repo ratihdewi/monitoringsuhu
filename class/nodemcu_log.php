@@ -11,6 +11,7 @@
         public $id;
         public $suhu;
         public $kelembaban;
+        public $ppm;
         public $created_at;
 
         // Db connection
@@ -24,16 +25,19 @@
                         ". $this->db_table ."
                     SET
                         t = :t, 
-                        h = :h";
+                        h = :h,
+                        ppm = :ppm";
             $stmt = $this->conn->prepare($sqlQuery);
         
             // sanitize
             $this->suhu=htmlspecialchars(strip_tags($this->suhu));
             $this->kelembaban=htmlspecialchars(strip_tags($this->kelembaban));
+            $this->ppm=htmlspecialchars(strip_tags($this->ppm));
         
             // bind data
             $stmt->bindParam(":t", $this->suhu);
             $stmt->bindParam(":h", $this->kelembaban);
+            $stmt->bindParam(":ppm", $this->ppm);
             if($stmt->execute()){
                return true;
             }
